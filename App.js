@@ -86,11 +86,14 @@ class Mo extends Component {
     
 
     zerarRelogio() {
+      var nrVolta = this.state.nroVolta
+      nrVolta = nrVolta +1  
         this.pararRelogio()
-        this.setState({ segundos: 0, minutos: 0, horas: 0 })
+        this.setState({ segundos: 0, minutos: 0, horas: 0, nroVolta: nrVolta })
+        this.state.numeroVoltas.push(nrVolta + '\n')
         
         if (this.state.voltas.length > 0) {
-            this.state.voltas.push('--------\n ')
+            this.state.voltas.push('--------\n')
             
         }       
         
@@ -118,7 +121,14 @@ class Mo extends Component {
                   (this.state.ativo ? "Pausar" : "Iniciar") }/> 
                 <Button onPress = { this.marcarVolta} title = "Marcar volta" />
                 <Button onPress = { this.zerarRelogio } title = "Zerar" />
-                    
+                <View style={styles.headerVoltas}>
+                  <View style={styles.nroVoltas}>
+                    <Text>Número de voltas</Text>
+                  </View>   
+                  <View style={styles.tempoVoltas}>
+                    <Text>Tempo das voltas</Text>
+                  </View>
+                </View> 
                 <View style={styles.voltas}>
                   <View style={styles.nroVoltas}>
                       <Text>                        
@@ -145,12 +155,15 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     flex: 1,
-    alignItems : 'center'
+    alignItems : 'center',
+    
   },
   header: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: ' center'    
+    alignItems: ' center' ,
+    marginBottom: 10,
+    fontSize: 20   
   },
   image: {
     width: 250,
@@ -176,5 +189,9 @@ const styles = StyleSheet.create({
   tempoVoltas:{
     flex:1,
     alignItems: ' center'
+  },
+  headerVoltas: {
+    flexDirection: 'row',
+    margin: 10
   }
 })
